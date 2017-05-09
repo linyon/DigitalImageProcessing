@@ -1,32 +1,35 @@
-﻿已經開始建置於 2017/4/1 上午 01:08:04。
-     1>節點 2 (build 目標) 上的專案 "D:\Work\Image\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization.vcxproj"。
+﻿已經開始建置於 2017/5/9 下午 07:43:48。
+     1>節點 2 (build 目標) 上的專案 "D:\Work\DigitalImageProcessing\HomeWork\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization.vcxproj"。
      1>InitializeBuildStatus:
-         正在變更時間戳記 "Debug\20170329_work01_ HistogramEqualization.unsuccessfulbuild"。
+         由於指定了 "AlwaysCreate"，因此正在建立 "Debug\20170329_work01_ HistogramEqualization.unsuccessfulbuild"。
        GenerateTargetFrameworkMonikerAttribute:
        將略過目標 "GenerateTargetFrameworkMonikerAttribute"，因為所有輸出檔對於其輸入檔而言都已更新。
        ClCompile:
-         所有輸出都是最新的。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\20170329_work01_ HistogramEqualization.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.DataVisualization.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt "20170329_work01_ HistogramEqualization.cpp" /clr:nostdlib 
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\20170329_work01_ HistogramEqualization.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.DataVisualization.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt stdafx.cpp /clr:nostdlib 
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\20170329_work01_ HistogramEqualization.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.DataVisualization.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt "20170329_work01_ HistogramEqualization.cpp" AssemblyInfo.cpp /clr:nostdlib 
          20170329_work01_ HistogramEqualization.cpp
+         AssemblyInfo.cpp
+         正在產生程式碼...
          所有輸出都是最新的。
        CoreResGen:
          相對於資源的來源檔案，並沒有資源過期。將略過產生資源。
        ResourceCompile:
-         所有輸出都是最新的。
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\app.res" app.rc 
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Work\Image\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:Debug\My20170329_work01_HistogramEqualization.Form1.resources /MANIFEST /ManifestFile:"Debug\20170329_work01_ HistogramEqualization.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Work\Image\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Work\DigitalImageProcessing\HomeWork\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:Debug\My20170329_work01_HistogramEqualization.Form1.resources /MANIFEST /ManifestFile:"Debug\20170329_work01_ HistogramEqualization.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Work\DigitalImageProcessing\HomeWork\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
          "Debug\20170329_work01_ HistogramEqualization.obj"
          Debug\AssemblyInfo.obj
          Debug\stdafx.obj
          "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
-         20170329_work01_ HistogramEqualization.vcxproj -> D:\Work\Image\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.exe
+         20170329_work01_ HistogramEqualization.vcxproj -> D:\Work\DigitalImageProcessing\HomeWork\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.exe
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\Work\Image\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.exe;#1" /manifest "Debug\20170329_work01_ HistogramEqualization.exe.intermediate.manifest"
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\Work\DigitalImageProcessing\HomeWork\20170329_work01_ HistogramEqualization\Debug\20170329_work01_ HistogramEqualization.exe;#1" /manifest "Debug\20170329_work01_ HistogramEqualization.exe.intermediate.manifest"
        FinalizeBuildStatus:
          正在刪除檔案 "Debug\20170329_work01_ HistogramEqualization.unsuccessfulbuild"。
          正在變更時間戳記 "Debug\20170329_work01_ HistogramEqualization.lastbuildstate"。
-     1>專案 "D:\Work\Image\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization.vcxproj" (build 目標) 建置完成。
+     1>專案 "D:\Work\DigitalImageProcessing\HomeWork\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization\20170329_work01_ HistogramEqualization.vcxproj" (build 目標) 建置完成。
 
 建置成功。
 
-經過時間 00:00:04.27
+經過時間 00:00:03.61
