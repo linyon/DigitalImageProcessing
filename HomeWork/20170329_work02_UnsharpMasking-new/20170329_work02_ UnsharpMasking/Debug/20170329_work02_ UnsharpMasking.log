@@ -1,0 +1,33 @@
+﻿已經開始建置於 2017/4/13 上午 12:52:16。
+     1>節點 2 (build 目標) 上的專案 "D:\Work\Image\20170329_work02_UnsharpMasking-new\20170329_work02_ UnsharpMasking\20170329_work02_ UnsharpMasking.vcxproj"。
+     1>InitializeBuildStatus:
+         由於指定了 "AlwaysCreate"，因此正在建立 "Debug\20170329_work02_ UnsharpMasking.unsuccessfulbuild"。
+       GenerateTargetFrameworkMonikerAttribute:
+       將略過目標 "GenerateTargetFrameworkMonikerAttribute"，因為所有輸出檔對於其輸入檔而言都已更新。
+       ClCompile:
+         所有輸出都是最新的。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\20170329_work02_ UnsharpMasking.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.DataVisualization.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt "20170329_work02_ UnsharpMasking.cpp" /clr:nostdlib 
+         20170329_work02_ UnsharpMasking.cpp
+     1>d:\work\image\20170329_work02_unsharpmasking-new\20170329_work02_ unsharpmasking\Form1.h(394): warning C4101: 'cc' : 未參考的區域變數
+     1>d:\work\image\20170329_work02_unsharpmasking-new\20170329_work02_ unsharpmasking\Form1.h(278): warning C4101: 'R' : 未參考的區域變數
+     1>d:\work\image\20170329_work02_unsharpmasking-new\20170329_work02_ unsharpmasking\Form1.h(263): warning C4101: 'aow' : 未參考的區域變數
+         所有輸出都是最新的。
+       CoreResGen:
+         相對於資源的來源檔案，並沒有資源過期。將略過產生資源。
+       ResourceCompile:
+         所有輸出都是最新的。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Work\Image\20170329_work02_UnsharpMasking-new\Debug\20170329_work02_ UnsharpMasking.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:Debug\My20170329_work02_UnsharpMasking.Form1.resources /MANIFEST:NO /DEBUG /PDB:"D:\Work\Image\20170329_work02_UnsharpMasking-new\Debug\20170329_work02_ UnsharpMasking.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
+         "Debug\20170329_work02_ UnsharpMasking.obj"
+         Debug\AssemblyInfo.obj
+         Debug\stdafx.obj
+         "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         20170329_work02_ UnsharpMasking.vcxproj -> D:\Work\Image\20170329_work02_UnsharpMasking-new\Debug\20170329_work02_ UnsharpMasking.exe
+       FinalizeBuildStatus:
+         正在刪除檔案 "Debug\20170329_work02_ UnsharpMasking.unsuccessfulbuild"。
+         正在變更時間戳記 "Debug\20170329_work02_ UnsharpMasking.lastbuildstate"。
+     1>專案 "D:\Work\Image\20170329_work02_UnsharpMasking-new\20170329_work02_ UnsharpMasking\20170329_work02_ UnsharpMasking.vcxproj" (build 目標) 建置完成。
+
+建置成功。
+
+經過時間 00:00:01.15
