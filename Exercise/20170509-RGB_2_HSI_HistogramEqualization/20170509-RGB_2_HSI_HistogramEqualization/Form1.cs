@@ -47,29 +47,50 @@ namespace _20170509_RGB_2_HSI_HistogramEqualization
             byte[] hsi_Values = new byte[hsi_bytes];
             System.Runtime.InteropServices.Marshal.Copy(ori_Ptr, ori_Values, 0, ori_bytes);//複製GRB信息到byte數組
             System.Runtime.InteropServices.Marshal.Copy(hsi_Ptr, hsi_Values, 0, hsi_bytes);//複製GRB信息到byte數組
-            double radial, theta;
-            double tempD, tempB;
             var hsi_h = new List<int>();
             var hsi_s = new List<double>();
             var hsi_i = new List<double>();
-            int i, j;
+            RGB2HSI(ori_Values, h, w, ori_data.Stride, hsi_h, hsi_s, hsi_i); // RGB 轉 HSI
+            var eqHist = new int[256];         
+            var count_eq = new int[256];
+            int size = ori_bytes / 3;
+            I_HE(size, hsi_i, eqHist);
+            HSI2RGB(hsi_Values, eqHist, size, hsi_h, hsi_s, hsi_i, count_eq);
+            System.Runtime.InteropServices.Marshal.Copy(hsi_Values, 0, hsi_Ptr, hsi_bytes);
+
+            chart1.Series["Series1"].LegendText = "eq";
+            chart1.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
+            chart1.ChartAreas["ChartArea1"].AxisX.Maximum = 255;
+            for (int i = 0; i <= 255; i++)
+            {
+                chart1.Series["Series1"].Points.AddXY(i, count_eq[i]);
+            }
+            hsi_image.UnlockBits(hsi_data);
+            ori_image.UnlockBits(ori_data);
+            pictureBox1.Image = hsi_image;
+        }
+        public void RGB2HSI(byte[] ori_values,int h,int w,int Stride,List<int> hsi_h, List<double> hsi_s,List<double> hsi_i)
+        {
             double r, g, b;
+            double radial, theta;
+            double tempD, tempB;
+            int i, j;
             for (i = 0; i < h; i++) //RGB 轉 HSI
             {
                 for (j = 0; j < w; j++)
                 {
-                    int ori_Index = i * ori_data.Stride + j * 3;
-                    var R = ori_Values[ori_Index + 2];
-                    var G = ori_Values[ori_Index + 1];
-                    var B = ori_Values[ori_Index];
-                    double level = 255.0;//R + G + B;
+                    int ori_Index = i * Stride + j * 3;
+                    var R = ori_values[ori_Index + 2];
+                    var G = ori_values[ori_Index + 1];
+                    var B = ori_values[ori_Index];
+                    double level = 255.0;
                     r = (R / level);
                     g = (G / level);
-                    b =(B / level);
+                    b = (B / level);
                     //H
                     radial = Math.Acos(0.5 * ((r - g) + (r - b)) / Math.Sqrt((r - g) * (r - g) + (r - b) * (g - b)));
                     theta = (radial * 180.0 / Math.PI);
-                    if (!double.IsNaN(theta)) tempD = (b <= g) ? theta:(360 - theta); 
+                    if (!double.IsNaN(theta)) tempD = (b <= g) ? theta : (360 - theta);
                     else tempD = 0;
                     hsi_h.Add(Convert.ToInt32(tempD));
                     //S
@@ -83,13 +104,13 @@ namespace _20170509_RGB_2_HSI_HistogramEqualization
                     hsi_i.Add(tempD);
                 }
             }
+        }
+        public void I_HE(int size, List<double> hsi_i,int[] eqHist)
+        {
+            int i;
             var hist = new int[256];
             var fpHist = new int[256];
             var eqHistTemp = new int[256];
-            var eqHist = new int[256];
-            var count_eq = new int[256];
-            int size = ori_bytes / 3;
-            int type;
             // 統計每個灰階值出現的像素數量--------
             for (i = 0; i < size; i++)
             {
@@ -107,7 +128,11 @@ namespace _20170509_RGB_2_HSI_HistogramEqualization
             {
                 eqHist[i] = (int)(255 * eqHistTemp[i] / size + 0.5);
             }
-            //執行灰階值映射、均衡化
+        }
+        public void HSI2RGB(byte[] hsi_Values,int[] eqHist,int size,List<int> hsi_h, List<double> hsi_s, List<double> hsi_i,int[] count_eq)
+        {
+            double r, g, b, theta;
+            int i,type;
             for (i = 0; i < size; i++)
             {
                 var H = hsi_h[i];
@@ -146,7 +171,7 @@ namespace _20170509_RGB_2_HSI_HistogramEqualization
                     r = tmp_3;
                     g = tmp_1;
                     b = tmp_2;
-                }        
+                }
                 var hsi_index = (int)(hsi_i[i] * 255.0);
                 r = r * 3.0 * eqHist[hsi_index];
                 g = g * 3.0 * eqHist[hsi_index];
@@ -168,24 +193,6 @@ namespace _20170509_RGB_2_HSI_HistogramEqualization
                 hsi_Values[i * 3 + 2] = (byte)r;
                 count_eq[eqHist[hsi_index]]++;
             }
-            //System.Runtime.InteropServices.Marshal.Copy(hsi_Ptr, hsi_Values, 0, hsi_bytes);//複製GRB信息到byte數組
-            System.Runtime.InteropServices.Marshal.Copy(hsi_Values, 0, hsi_Ptr, hsi_bytes);
-            chart1.Series["Series1"].LegendText = "eq";
-            chart1.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
-            chart1.ChartAreas["ChartArea1"].AxisX.Maximum = 255;
-            for (i = 0; i <= 255; i++)
-            {
-                chart1.Series["Series1"].Points.AddXY(i, count_eq[i]);
-            }
-
-            hsi_image.UnlockBits(hsi_data);
-            ori_image.UnlockBits(ori_data);
-            pictureBox1.Image = hsi_image;
         }
-        public void RGB2HSI()
-        {
-
-        }
-
     }
 }
