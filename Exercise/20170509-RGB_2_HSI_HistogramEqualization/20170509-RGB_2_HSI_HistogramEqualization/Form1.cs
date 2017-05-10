@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using ImageProcessing;
 namespace _20170509_RGB_2_HSI_HistogramEqualization
 {
     public partial class Form1 : Form
@@ -50,149 +51,34 @@ namespace _20170509_RGB_2_HSI_HistogramEqualization
             var hsi_h = new List<int>();
             var hsi_s = new List<double>();
             var hsi_i = new List<double>();
-            RGB2HSI(ori_Values, h, w, ori_data.Stride, hsi_h, hsi_s, hsi_i); // RGB 轉 HSI
-            var eqHist = new int[256];         
+            var count = new int[256];
+            Method.RGB2HSI(ori_Values, h, w, ori_data.Stride, hsi_h, hsi_s, hsi_i, count); // RGB 轉 HSI
+            var eqHist = new int[256];
             var count_eq = new int[256];
             int size = ori_bytes / 3;
-            I_HE(size, hsi_i, eqHist);
-            HSI2RGB(hsi_Values, eqHist, size, hsi_h, hsi_s, hsi_i, count_eq);
+            Method.HE(size, hsi_i, eqHist);
+            Method.HSI2RGB(hsi_Values, eqHist, size, hsi_h, hsi_s, hsi_i, count_eq);
             System.Runtime.InteropServices.Marshal.Copy(hsi_Values, 0, hsi_Ptr, hsi_bytes);
 
-            chart1.Series["Series1"].LegendText = "eq";
+            chart1.Series["Series1"].LegendText = "原圖的I";
             chart1.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
             chart1.ChartAreas["ChartArea1"].AxisX.Maximum = 255;
             for (int i = 0; i <= 255; i++)
             {
-                chart1.Series["Series1"].Points.AddXY(i, count_eq[i]);
+                chart1.Series["Series1"].Points.AddXY(i, count[i]);
+            }
+            chart2.Series["Series1"].LegendText = "I均衡化後";
+            chart2.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
+            chart2.ChartAreas["ChartArea1"].AxisX.Maximum = 255;
+            for (int i = 0; i <= 255; i++)
+            {
+                chart2.Series["Series1"].Points.AddXY(i, count_eq[i]);
             }
             hsi_image.UnlockBits(hsi_data);
             ori_image.UnlockBits(ori_data);
-            pictureBox1.Image = hsi_image;
+            pictureBox1.Image = ori_image;
+            pictureBox2.Image = hsi_image;
         }
-        public void RGB2HSI(byte[] ori_values,int h,int w,int Stride,List<int> hsi_h, List<double> hsi_s,List<double> hsi_i)
-        {
-            double r, g, b;
-            double radial, theta;
-            double tempD, tempB;
-            int i, j;
-            for (i = 0; i < h; i++) //RGB 轉 HSI
-            {
-                for (j = 0; j < w; j++)
-                {
-                    int ori_Index = i * Stride + j * 3;
-                    var R = ori_values[ori_Index + 2];
-                    var G = ori_values[ori_Index + 1];
-                    var B = ori_values[ori_Index];
-                    double level = 255.0;
-                    r = (R / level);
-                    g = (G / level);
-                    b = (B / level);
-                    //H
-                    radial = Math.Acos(0.5 * ((r - g) + (r - b)) / Math.Sqrt((r - g) * (r - g) + (r - b) * (g - b)));
-                    theta = (radial * 180.0 / Math.PI);
-                    if (!double.IsNaN(theta)) tempD = (b <= g) ? theta : (360 - theta);
-                    else tempD = 0;
-                    hsi_h.Add(Convert.ToInt32(tempD));
-                    //S
-                    tempB = Math.Min(r, g);
-                    tempB = Math.Min(tempB, b);
-                    tempD = 1.0 - 3.0 * tempB / (r + g + b);
-                    if (double.IsNaN(tempD)) tempD = 0;
-                    hsi_s.Add(tempD);
-                    //I
-                    tempD = (r + g + b) / 3.0;
-                    hsi_i.Add(tempD);
-                }
-            }
-        }
-        public void I_HE(int size, List<double> hsi_i,int[] eqHist)
-        {
-            int i;
-            var hist = new int[256];
-            var fpHist = new int[256];
-            var eqHistTemp = new int[256];
-            // 統計每個灰階值出現的像素數量--------
-            for (i = 0; i < size; i++)
-            {
-                var tmp = (int)(hsi_i[i] * 255.0);
-                hist[tmp]++;
-            }
-            //計算累計直方圖-------------------
-            eqHistTemp[0] = hist[0];
-            for (i = 1; i < 256; i++)
-            {
-                eqHistTemp[i] = eqHistTemp[i - 1] + hist[i];
-            }
-            //累計分布並取整數，儲存計算出來的灰階值映射關係
-            for (i = 0; i < 256; i++)
-            {
-                eqHist[i] = (int)(255 * eqHistTemp[i] / size + 0.5);
-            }
-        }
-        public void HSI2RGB(byte[] hsi_Values,int[] eqHist,int size,List<int> hsi_h, List<double> hsi_s, List<double> hsi_i,int[] count_eq)
-        {
-            double r, g, b, theta;
-            int i,type;
-            for (i = 0; i < size; i++)
-            {
-                var H = hsi_h[i];
-                if (H <= 120)
-                {
-                    type = 0;
-                }
-                else if (H > 120 && H <= 240)
-                {
-                    H = H - 120;
-                    type = 1;
-                }
-                else
-                {
-                    H = H - 240;
-                    type = 2;
-                }
-                theta = 60 - H;
-                var tmp_1 = ((1 - hsi_s[i])) / 3.0;
-                var tmp_2 = (1 + (hsi_s[i] * Math.Cos(H * Math.PI / 180.0) / Math.Cos(theta * Math.PI / 180.0))) / 3.0;
-                var tmp_3 = (1 - (tmp_1 + tmp_2));
-                if (type == 0)
-                {
-                    r = tmp_2;
-                    g = tmp_3;
-                    b = tmp_1;
-                }
-                else if (type == 1)
-                {
-                    r = tmp_1;
-                    g = tmp_2;
-                    b = tmp_3;
-                }
-                else
-                {
-                    r = tmp_3;
-                    g = tmp_1;
-                    b = tmp_2;
-                }
-                var hsi_index = (int)(hsi_i[i] * 255.0);
-                r = r * 3.0 * eqHist[hsi_index];
-                g = g * 3.0 * eqHist[hsi_index];
-                b = b * 3.0 * eqHist[hsi_index];
-                if (r > 255)
-                    r = 255;
-                else if (r < 0)
-                    r = 0;
-                if (g > 255)
-                    g = 255;
-                else if (g < 0)
-                    g = 0;
-                if (b > 255)
-                    b = 255;
-                else if (b < 0)
-                    b = 0;
-                hsi_Values[i * 3] = (byte)b;
-                hsi_Values[i * 3 + 1] = (byte)g;
-                hsi_Values[i * 3 + 2] = (byte)r;
-                count_eq[eqHist[hsi_index]]++;
-            }
-        }
+        
     }
 }
