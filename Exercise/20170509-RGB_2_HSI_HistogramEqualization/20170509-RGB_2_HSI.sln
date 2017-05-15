@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "20170509-RGB_2_HSI_HistogramEqualization", "20170509-RGB_2_HSI_HistogramEqualization\20170509-RGB_2_HSI_HistogramEqualization.csproj", "{B0BC8995-CDE7-4C3C-B6CA-E2897645FB90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "20170509-RGB_2_HSI", "20170509-RGB_2_HSI_HistogramEqualization\20170509-RGB_2_HSI.csproj", "{B0BC8995-CDE7-4C3C-B6CA-E2897645FB90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing", "ImageProcessing\ImageProcessing.csproj", "{965283E7-F104-49B4-A234-57ABAC0EDD04}"
 EndProject
