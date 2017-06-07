@@ -21,12 +21,7 @@ namespace _20170531_work05_MorphologicalImageProcessing
         Rectangle imageRect;
         byte[] ori_Values;
         int ori_bytes;
-
-        //Bitmap d_image;
-        //BitmapData d_data;
-        //int d_bytes;
-
-        //byte[] tmp_Values;
+        bool check_input = false;
         private byte[,] shape
         {
             get
@@ -59,57 +54,71 @@ namespace _20170531_work05_MorphologicalImageProcessing
                 System.Runtime.InteropServices.Marshal.Copy(ori_Ptr, ori_Values, 0, ori_bytes);//複製RGB信息到byte數組
                 GrayLevel(ori_image.Height, ori_image.Width, ori_data.Stride, ori_Values);
                 System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_Ptr, ori_bytes); //複製byte陣列到RGB
-                //tmp_Values = new byte[ori_bytes];
-                //System.Array.Copy(ori_Values, 0, tmp_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到tmp_Values陣列
                 ori_image.UnlockBits(ori_data);
-                //check_input = true;
+                check_input = true;
                 pictureBox1.Image = ori_image;
             }
         }
 
         private void dilationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
-            var D_Values = new byte[ori_bytes];
-            Array.Copy(ori_Values, 0, D_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
-            ori_Values = Dilation_Erosion(D_Values, true, 3);
-            System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
-            ori_image.UnlockBits(ori_data);
-            pictureBox2.Image = ori_image;
+            if (check_input)
+            {
+                ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
+                var D_Values = new byte[ori_bytes];
+                Array.Copy(ori_Values, 0, D_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
+                ori_Values = Dilation_Erosion(D_Values, true, 3);
+                System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
+                ori_image.UnlockBits(ori_data);
+                pictureBox2.Image = ori_image;
+            }
+            else MessageBox.Show("未先選擇圖檔", "ERROR",MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         private void ErosionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
-            var E_Values = new byte[ori_bytes];
-            Array.Copy(ori_Values, 0, E_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
-            ori_Values = Dilation_Erosion(E_Values, false ,3);
-            System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
-            ori_image.UnlockBits(ori_data);
-            pictureBox2.Image = ori_image;
+            if (check_input)
+            {
+                ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
+                var E_Values = new byte[ori_bytes];
+                Array.Copy(ori_Values, 0, E_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
+                ori_Values = Dilation_Erosion(E_Values, false, 3);
+                System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
+                ori_image.UnlockBits(ori_data);
+                pictureBox2.Image = ori_image;
+            }
+            else MessageBox.Show("未先選擇圖檔", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         { //先侵蝕再膨脹，斷開就是(AΘB)⊕B
-            ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
-            var O_Values = new byte[ori_bytes];
-            Array.Copy(ori_Values, 0, O_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
-            O_Values = Dilation_Erosion(O_Values, false, 3); //侵蝕
-            ori_Values = Dilation_Erosion(O_Values, true, 3); //膨脹
-            System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
-            ori_image.UnlockBits(ori_data);
-            pictureBox2.Image = ori_image;
+            if (check_input)
+            {
+                ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
+                var O_Values = new byte[ori_bytes];
+                Array.Copy(ori_Values, 0, O_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
+                O_Values = Dilation_Erosion(O_Values, false, 3); //侵蝕
+                ori_Values = Dilation_Erosion(O_Values, true, 3); //膨脹
+                System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
+                ori_image.UnlockBits(ori_data);
+                pictureBox2.Image = ori_image;
+            }
+            else MessageBox.Show("未先選擇圖檔", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         { //先膨脹再侵蝕，閉合就是(A⊕B)ΘB
-            ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
-            var O_Values = new byte[ori_bytes];
-            Array.Copy(ori_Values, 0, O_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
-            O_Values = Dilation_Erosion(O_Values, true, 3); //膨脹
-            ori_Values = Dilation_Erosion(O_Values, false, 3); //侵蝕
-            System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
-            ori_image.UnlockBits(ori_data);
-            pictureBox2.Image = ori_image;
+            if (check_input)
+            {
+                ori_image.LockBits(imageRect, ImageLockMode.ReadWrite, ori_image.PixelFormat);
+                var O_Values = new byte[ori_bytes];
+                Array.Copy(ori_Values, 0, O_Values, 0, ori_bytes); //把ori_Values陣列的數值複製到D_Values陣列
+                O_Values = Dilation_Erosion(O_Values, true, 3); //膨脹
+                ori_Values = Dilation_Erosion(O_Values, false, 3); //侵蝕
+                System.Runtime.InteropServices.Marshal.Copy(ori_Values, 0, ori_data.Scan0, ori_bytes); //複製byte陣列到RGB
+                ori_image.UnlockBits(ori_data);
+                pictureBox2.Image = ori_image;
+            }
+            else MessageBox.Show("未先選擇圖檔", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         public void GrayLevel(int h, int w, int stride, byte[] ori_bmp)
         {
